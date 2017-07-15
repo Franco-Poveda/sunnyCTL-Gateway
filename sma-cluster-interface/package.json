@@ -1,0 +1,16 @@
+{
+  "name": "sma-interface",
+  "version": "1.0.0",
+  "description": "traffic redirector consumer",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "Franco [pogui] Poveda",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.1",
+    "config": "^1.26.1",
+    "rpi-gpio": "^0.8.1"
+  }
+}
