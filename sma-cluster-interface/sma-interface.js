@@ -3,6 +3,7 @@ const gpio = require('rpi-gpio');
 
 class SMAdigitalInterface {
     constructor({ logger, config }) {
+
         this.logger = logger;
         this.config = config.amqp;
         this.io = config.get('gpio');
@@ -65,7 +66,13 @@ class SMAdigitalInterface {
                         console.log('Written to pin');
                         return;
                     });
-                }), this.inCh.ack(msg));
+                }), () => {
+                    this.outCh.publish(
+                        this.config.out.exchange.name,
+                        this.config.out.queue.binding
+                    );
+                    this.inCh.ack(msg);
+                });
     }
 }
 
