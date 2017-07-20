@@ -58,15 +58,10 @@ def make_font(name, size):
 
 
 def main():
-
+    # Custom font:
     font = make_font("fontawesome-webfont.ttf", device.height / 4)
-    mfont = make_font("fontawesome-webfont.ttf", device.height / 4)
-
-    # use custom font
-    font_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                             'fonts', 'C&C Red Alert [INET].ttf'))
+    font_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'fonts', 'C&C Red Alert [INET].ttf'))
     font2 = ImageFont.truetype(font_path, 13)
-
     font3 = ImageFont.truetype(font_path, 11)
 
     i = -100
@@ -94,8 +89,8 @@ def main():
             draw.text((107, 30), text=dict[do2[3]], font=font, fill="white")
             # MENU:
             #draw.line((1, 50, 120, 50), fill="white")
-            draw.text((2, 49), text="\uf05d", font=mfont, fill="white")
-            draw.text((110, 49), text="\uf057", font=mfont, fill="white")
+            draw.text((2, 49), text="\uf05d", font=font, fill="white")
+            draw.text((110, 49), text="\uf057", font=font, fill="white")
 
     time.sleep(0.8)
 

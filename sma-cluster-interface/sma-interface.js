@@ -5,11 +5,11 @@ class SMAdigitalInterface {
     constructor({ logger, config }) {
         this.logger = logger;
         this.config = config.amqp;
-        this.do1 = config.gpio.do1;
-        this.do2 = config.gpio.do2;
+        this.io = config.get('gpio');
 
         gpio.setMode(gpio.MODE_BCM);
-        const setupDO1 = this.do1.map(p => {
+
+        const setupDO1 = this.io.do1.map(p => {
             return new Promise((resolve, reject) => {
                 return gpio.setup(p, gpio.DIR_HIGH, (err) => {
                     if (err)
@@ -18,7 +18,7 @@ class SMAdigitalInterface {
                 });
             });
         });
-        const setupDO2 = this.do2.map(p => {
+        const setupDO2 = this.io.do2.map(p => {
             return new Promise((resolve, reject) => {
                 return gpio.setup(p, gpio.DIR_HIGH, (err) => {
                     if (err)

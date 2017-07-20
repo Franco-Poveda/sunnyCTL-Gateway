@@ -1,16 +1,20 @@
 {
-  "name": "sma-interface",
-  "version": "1.0.0",
-  "description": "traffic redirector consumer",
-  "main": "index.js",
-  "scripts": {
-    "test": ""
-  },
-  "author": "Franco [pogui] Poveda",
-  "license": "ISC",
-  "dependencies": {
-    "amqplib": "^0.5.1",
-    "config": "^1.26.1",
-    "rpi-gpio": "^0.8.1"
-  }
+    "name": "sma-cluster-interface",
+    "version": "1.0.0",
+    "description": "SMA Cluser Controler digital interface exposed to sunny-PAAS",
+    "author": "Franco Poveda <franco.poveda@gmail.com> [6/2017@Aldar]",
+    "license": "ISC",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "micro-libs": "git+ssh://git@github.com:Franco-Poveda/micro-libs.git",
+        "config": "^1.26.1",
+        "rpi-gpio": "^0.8.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Franco-Poveda/sunny-control-hardware.git"
+    }
 }

@@ -1,10 +1,36 @@
 {
     "amqp": {
-        "uri": "amqp://sunny:sunny@localhost:5672",
-        "outExchange": "all-errs",
-        "inQueue": "sma-apply",
-        "bindKey": "*",
-        "bindExchange": "tasks"
+        "uri": "amqp://sunny:sunny@192.168.88.99:5672/",
+        "in": {
+            "queue": {
+                "name": "smaIface",
+                "binding": "apply",
+                "options": {
+                    "durable": true
+                }
+            },
+            "exchange": {
+                "name": "tasks"
+            }
+        },
+        "out": {
+            "queue": {
+                "name": "DIstate",
+                "binding": "current",
+                "options": {
+                    "durable": true
+                }
+            },
+            "exchange": {
+                "name": "lsc",
+                "type": "x-lvc",
+                "options": {
+                    "autoDelete": false,
+                    "durable": true,
+                    "passive": true
+                }
+            }
+        }
     },
     "gpio": {
         "do1": [
