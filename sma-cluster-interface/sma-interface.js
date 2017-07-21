@@ -66,13 +66,14 @@ class SMAdigitalInterface {
                         console.log('Written to pin');
                         return;
                     });
-                }), msg => {
-                    this.outCh.publish(
-                        this.config.out.exchange.name,
-                        this.config.out.queue.binding,
-                        msg);
-                    this.inCh.ack(msg);
-                });
+                })
+        ), msg => {
+            this.outCh.publish(
+                this.config.out.exchange.name,
+                this.config.out.queue.binding,
+                msg);
+            this.inCh.ack(msg);
+        };
     }
 }
 
