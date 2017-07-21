@@ -5,7 +5,7 @@ class SMAdigitalInterface {
     constructor({ logger, config }) {
 
         this.logger = logger;
-        this.config = config.amqp;
+        this.config = config.get('amqp');
         this.io = config.get('gpio');
 
         gpio.setMode(gpio.MODE_BCM);
@@ -54,14 +54,14 @@ class SMAdigitalInterface {
         console.log(message);
         message.do1.forEach(
             (state, i) => {
-                gpio.write(this.do1[i], state, function (err) {
+                gpio.write(this.io.do1[i], state, function (err) {
                     if (err) throw err;
                     console.log('Written to pin');
                     return;
                 });
             }, message.do2.forEach(
                 (state, i) => {
-                    gpio.write(this.do2[i], state, function (err) {
+                    gpio.write(this.io.do2[i], state, function (err) {
                         if (err) throw err;
                         console.log('Written to pin');
                         return;
