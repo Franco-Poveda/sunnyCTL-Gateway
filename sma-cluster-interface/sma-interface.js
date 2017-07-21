@@ -46,7 +46,7 @@ class SMAdigitalInterface {
         this.inCh = inCh;
         this.outCh = outCh;
         this.inCh.prefetch(1);
-        return this.inCh.consume(this.config.inQueue, this.handleMessage.bind(this), { noAck: false });
+        return this.inCh.consume(this.config.in.queue.name, this.handleMessage.bind(this), { noAck: false });
     }
     handleMessage(msg) {
 

@@ -26,8 +26,7 @@
                 "type": "x-lvc",
                 "options": {
                     "autoDelete": false,
-                    "durable": true,
-                    "passive": true
+                    "durable": true
                 }
             }
         }
