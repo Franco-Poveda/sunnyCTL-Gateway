@@ -9,9 +9,9 @@
         "start": "node index.js"
     },
     "dependencies": {
-        "micro-libs": "git+ssh://git@github.com:Franco-Poveda/micro-libs.git",
         "config": "^1.26.1",
-        "rpi-gpio": "^0.8.1"
+        "micro-libs": "git+ssh://git@github.com/Franco-Poveda/micro-libs.git",
+        "rpi-gpio": "git+ssh://git@github.com/jamesbulpin/rpi-gpio.js.git"
     },
     "repository": {
         "type": "git",

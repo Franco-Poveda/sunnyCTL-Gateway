@@ -4,7 +4,7 @@
         "in": {
             "queue": {
                 "name": "smaIface",
-                "binding": "apply",
+                "binding": "write",
                 "options": {
                     "durable": true
                 }
@@ -15,8 +15,8 @@
         },
         "out": {
             "queue": {
-                "name": "DIstate",
-                "binding": "current",
+                "name": "spread",
+                "binding": "curr",
                 "options": {
                     "durable": true
                 }
@@ -42,7 +42,7 @@
             18,
             15,
             23,
-            22
+            20
         ]
     }
 }

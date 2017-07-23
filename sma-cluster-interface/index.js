@@ -8,7 +8,6 @@ const SMAdigitalInterface = require('./sma-interface');
 
 const appEnv = process.env.NODE_ENV || 'development';
 logger.init({ env: appEnv, serviceName: 'sma-cluster-interface' });
-logger.emit('debug','HOLA');
 
 const amqp = new Rabbitmq({ logger, config: config.get('amqp') });
 amqp.connect()
