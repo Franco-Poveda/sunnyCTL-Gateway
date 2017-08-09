@@ -38,7 +38,7 @@ const openOutChannel = amqpConn => amqpConn.createConfirmChannel()
     );
 
 const openInChannel = amqpConn => amqpConn.createChannel()
-    .then(ch => ch.assertQueue(conf.inQueue, { durable: true })
+    .then(ch => ch.assertQueue(conf.inQueue, {autoDelete: true, durable: false })
         .then(_qok => ch.bindQueue(conf.inQueue, conf.bindExchange, conf.bindKey))    
         .then(() => ch));
     

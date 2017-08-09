@@ -1,14 +1,23 @@
 {
     "amqp": {
-        "uri":"amqp://rabbitmq:rabbitmq@172.17.0.1:5672",
-        "outExchange" : "res-err",
-        "inQueue": "vloom",
-        "bindKey":"vloom",
-        "bindExchange":"response"
+        "uri": "amqp://sunny:sunny@localhost:5672",
+        "outExchange": "tasks",
+        "inQueue": "spread",
+        "bindKey": "curr",
+        "bindExchange": "lsc"
     },
-    "token":{
-        "94960": "b7b4f9326e570e3e449e35a4d072abc9774097ce",
-        "26100": "bdd91196f9540316308fc855af89b65f371c605d",
-        "44099": "a70af09904ecd2687a9e85f11251dc54ab2d2b8c"
-            }
+    "gpio": {
+        "do1": [
+            12,
+            16,
+            26,
+            21
+        ],
+        "do2": [
+            18,
+            15,
+            23,
+            22
+        ]
+    }
 }

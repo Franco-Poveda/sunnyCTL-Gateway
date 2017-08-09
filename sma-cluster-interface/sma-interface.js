@@ -62,7 +62,7 @@ class SMAdigitalInterface {
             this.outCh.publish(
                 this.config.out.exchange.name,
                 this.config.out.queue.binding,
-                new Buffer(JSON.stringify(msg.content)),
+                new Buffer(msg.content),
                 {}, (err) => {
                     if (err) {
                         this.logger.emit("info", "PUBLISH_ERR: " + err);

@@ -2,9 +2,9 @@
     "amqp": {
         "uri": "amqp://sunny:sunny@localhost:5672",
         "outExchange": "tasks",
-        "inQueue": "status",
-        "bindKey": "*",
-        "bindExchange": "all-errs"
+        "inQueue": "spread",
+        "bindKey": "curr",
+        "bindExchange": "lsc"
     },
     "gpio": {
         "do1": [
