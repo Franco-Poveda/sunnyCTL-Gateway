@@ -1,4 +1,7 @@
-const gpio = require('rpi-gpio');
+const PCF8574 = require('pcf8574').PCF8574;
+const i2cBus = require('i2c-bus').openSync(1);
+
+const addr = 0x38;
 
 
 class SMAdigitalInterface {
@@ -7,7 +10,7 @@ class SMAdigitalInterface {
         this.logger = logger;
         this.config = config.get('amqp');
         this.io = config.get('gpio');
-
+        this.pcf = new PCF8574(i2cBus, addr, true);
 
     }
 
@@ -15,27 +18,16 @@ class SMAdigitalInterface {
         this.inCh = inCh;
         this.outCh = outCh;
         this.inCh.prefetch(1);
-        gpio.setMode(gpio.MODE_BCM);
-
         const channels = this.io.do1.concat(this.io.do2);
-        const direction = gpio.DIR_HIGH;
-        this.setup(channels, direction);
+        this.setup(channels);
 
     }
-    setup(chs, dir = gpio.MODE_BCM) {
+    setup(chs) {
         const setup = chs.map(c => {
-            return new Promise((resolve, reject) => {
-                return gpio.setup(c, dir, (err) => {
-                    if (err)
-                        return reject(err);
-                    return resolve('true');
-                });
-            });
+            return this.pcf.outputPin(c, false, true);
         });
 
         Promise.all(setup).then(values => {
-            this.logger.emit('debug', values);
-
             this.inCh.consume(this.config.in.queue.name, this.handleMessage.bind(this), { noAck: false })
 
         }).catch(reason => {
@@ -48,16 +40,10 @@ class SMAdigitalInterface {
         this.logger.emit('debug', message);
         message.do1.forEach(
             (state, i) => {
-                gpio.write(this.io.do1[i], state, function (err) {
-                    if (err) throw err;
-                    return;
-                });
+                return this.pcf.setPin(this.io.do1[i], (state == 0)? false:true);
             }, message.do2.forEach(
                 (state, i) => {
-                    gpio.write(this.io.do2[i], state, function (err) {
-                        if (err) throw err;
-                        return;
-                    });
+                    return this.pcf.setPin(this.io.do2[i], (state == 0)? false:true);
                 }),
             this.outCh.publish(
                 this.config.out.exchange.name,
@@ -77,4 +63,3 @@ class SMAdigitalInterface {
 }
 
 module.exports = SMAdigitalInterface;
-

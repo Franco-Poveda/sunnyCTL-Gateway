@@ -11,6 +11,7 @@
     "dependencies": {
         "config": "^1.26.1",
         "micro-libs": "git+ssh://git@github.com/Franco-Poveda/micro-libs.git",
+        "pcf8574": "^1.1.0",
         "rpi-gpio": "git+ssh://git@github.com/jamesbulpin/rpi-gpio.js.git"
     },
     "repository": {

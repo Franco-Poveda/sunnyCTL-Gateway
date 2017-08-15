@@ -19,24 +19,32 @@ amqp.connect()
     .then(channels => {
         channels[0].consume(config.amqp.inQueue, msg => {
             currState = JSON.parse(msg.content.toString());
+            console.log(currState);
             console.log("got new state, passing to PaaS");
+            client.publish('controller', JSON.stringify({ state: currState }))
             channels[0].ack(msg);
-        },{"noAck": false});
+        }, { "noAck": false });
 
         client.on('connect', function () {
             console.log('MQTT connected');
-            client.subscribe('params')
-            client.publish('controller', new Buffer(JSON.stringify(currState)))
-
+            client.subscribe('params');
+            client.subscribe('getState');
 
         });
 
         client.on('message', function (topic, message) {
-            console.log('request.body: ' + message.toString());
-            state = message.toString();
-            client.publish('controller', '{"state":' + state + '}')
-            channels[1].publish('tasks', 'write', new Buffer(message));
+            if (topic == 'getState') {
+                console.log("getState");
+                client.publish('controller', JSON.stringify({ state: currState }))
 
+            }
+            else {
+                console.log('request.body: ' + message.toString());
+                state = message.toString();
+                client.publish('controller', '{"state":' + state + '}')
+                channels[1].publish('tasks', 'write', new Buffer(message));
+
+            }
         });
 
     });
