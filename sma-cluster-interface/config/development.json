@@ -1,6 +1,6 @@
 {
     "amqp": {
-        "uri": "amqp://sunny:sunny@192.168.88.99:5672/",
+        "uri": "amqp://sunny:sunny@localhost:5672/",
         "in": {
             "queue": {
                 "name": "smaIface",
